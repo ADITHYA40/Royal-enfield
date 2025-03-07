@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Bikes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-image: url('{{ url_for('static', filename='images/background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+        }
+        header h1 {
+            margin: 0.5em 0;
+        }
+        .manager-details, .collections {
+            background-color: #ddd;
+            text-align: center;
+            padding: 2em 0;
+        }
+        .manager-details h2, .collections h2 {
+            margin: 0;
+        }
+        .collections-bg {
+            background-image: url('{{ url_for('static', filename='images/collections_bg.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            padding: 2em 0;
+        }
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .bike {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 1em;
+            text-align: center;
+        }
+        .bike img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .bike h3 {
+            margin: 0.5em 0;
+        }
+        .bike p {
+            margin: 0.5em 0;
+        }
+        .bike button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 1em;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Branch Bikes</h1>
+    </header>
+    <div class="manager-details">
+        <h2>Manager Details of Branch</h2>
+        <p>Manager ID: {{ manager['employee_id'] }}</p>
+        <p>Name: {{ manager['name'] }} {{ manager['last_name'] }}</p>
+        <p>Email: {{ manager['email'] }}</p>
+        <p>Phone Number: {{ manager['ph_no'] }}</p>
+    </div>
+    <div class="collections">
+        <h2>LOOK AT OUR COLLECTIONS</h2>
+    </div>
+    <div class="collections-bg">
+        <div class="carousel">
+            <div class="carousel-inner" id="carousel-inner">
+                {% for bike in bikes %}
+                <div class="bike">
+                    <img src="{{ url_for('static', filename=bike['image']) }}" alt="{{ bike['name'] }}">
+                    <h3>{{ bike['name'] }}</h3>
+                    <p>Color: {{ bike['colour'] }}</p>
+                    <p>CC: {{ bike['CC'] }}</p>
+                    <p>MRP: {{ bike['MRP'] }}</p>
+                    <button onclick="window.location.href='{{ url_for('customer', bike_id=bike['bike_ID'], branch_id=branch_id) }}'">Buy</button>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+            <a class="next" onclick="moveSlide(1)">&#10095;</a>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+
+        function showSlides(index) {
+            const slides = document.getElementsByClassName('bike');
+            if (index >= slides.length) { currentSlide = 0 }
+            if (index < 0) { currentSlide = slides.length - 1 }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+            slides[currentSlide].style.display = 'block';
+        }
+
+        function moveSlide(n) {
+            showSlides(currentSlide += n);
+        }
+
+        window.onload = function() {
+            showSlides(currentSlide);
+        }
+    </script>
+</body>
+</html>

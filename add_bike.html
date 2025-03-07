@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='images/bg2.jpg') }}'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 2em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .form-container h2 {
+            margin-bottom: 1em;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add New Bike</h2>
+        <form method="post" action="{{ url_for('add_bike') }}">
+            <label for="cc">CC:</label>
+            <input type="number" id="cc" name="cc" required>
+            
+            <label for="colour">Colour:</label>
+            <input type="text" id="colour" name="colour" required>
+            
+            <label for="branch_id">Branch ID:</label>
+            <input type="number" id="branch_id" name="branch_id" required>
+            
+            <label for="mrp">MRP:</label>
+            <input type="number" id="mrp" name="mrp" required>
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required>
+            
+            <button type="submit">Add Bike</button>
+        </form>
+    </div>
+</body>
+</html>

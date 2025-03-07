@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='images/bg1.jpg') }}'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: rgba(205, 245, 7, 0.8); /* Semi-transparent background */
+            padding: 2em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            margin-bottom: 1em;
+        }
+        .details {
+            margin-bottom: 1em;
+        }
+        .details p {
+            margin: 0.5em 0;
+        }
+        .options ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 1em 0;
+        }
+        .options a {
+            text-decoration: none;
+            color: #f80505;
+            font-weight: bold;
+        }
+        .options a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Details</h2>
+        <div class="details">
+            <p><strong>Employee ID:</strong> {{ employee.employee_id }}</p>
+            <p><strong>First Name:</strong> {{ employee.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ employee.last_name }}</p>
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+        </div>
+        <div class="options">
+            <ul>
+                <li><a href="{{ url_for('add_bike') }}">Add Bike to Branch</a></li>
+                <li><a href="{{ url_for('add_employee') }}">Add New Employee</a></li>
+                <li><a href="{{ url_for('add_branch') }}">Add New Branch</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

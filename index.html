@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS Mini Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-image: url('{{ url_for('static', filename='images/background.jpg') }}'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+        }
+        header h1, header h2 {
+            margin: 0.5em 0;
+        }
+        .collections {
+            background-color: #ddd;
+            text-align: center;
+            padding: 2em 0;
+        }
+        .collections h2 {
+            margin: 0;
+        }
+        .collections-bg {
+            background-image: url('{{ url_for('static', filename='images/collections_bg.jpg') }}'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            padding: 2em 0;
+        }
+        table {
+            width: 80%;
+            margin: 2em auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            padding: 1em;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 1em;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DBMS MINI PROJECT</h1>
+        <h2>Royal Enfield Database</h2>
+        <p>GIRISH N S    1RN22CS046</p>
+        <p>GOUTHAM S       1RN22CS048</p>
+        <p>AVYAKTH A SHETTY 1RN22CS024</p>
+        <p>B S SHASHANK    1RN22CS027</p>
+    </header>
+    <div class="collections">
+        <h2>Visit Branch Which Is Convinient </h2>
+    </div>
+    <div class="collections-bg">
+        <table>
+            <tr>
+                <th>Branch Name</th>
+                <th>Branch Location</th>
+                <th>Manager Name</th>
+                <th>VISIT</th>
+            </tr>
+            {% for branch in branches %}
+            <tr>
+                <td>{{ branch['branch_name'] }}</td>
+                <td>{{ branch['location'] }}</td>
+                <td>{{ branch['manager_name'] }}</td>
+                <td><a href="{{ url_for('branch_bikes', branch_id=branch['branch_ID']) }}">Visit</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <footer>
+        <a href="{{ url_for('emp') }}">I'm an employee</a>
+    </footer>
+</body>
+</html>
